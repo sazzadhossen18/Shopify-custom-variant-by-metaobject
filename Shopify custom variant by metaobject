@@ -1,0 +1,34 @@
+{% assign customvariants = product.metafields.custom.custom_variants.value %}
+
+{% for customvariant in customvariants %}
+<!-- Custom Variant Button -->
+<fieldset class="option-selector" data-selector-type="listed">
+  <legend class="label">{{ customvariant.label_name }}</legend>
+  <div class="option-selector__btns flex flex-wrap">
+
+    {% for opt in customvariant.option.value  %}
+    <input
+      type="radio"
+      class="opt-btn visually-hidden focus-label js-option"
+      id="{{ opt }}-{{ forloop.index }}"
+      name="properties[{{ customvariant.label_name}} ]"
+      value="{{ opt }}"
+      form="{{ product_form_id }}"
+      {% if forloop.first %}
+      checked=""
+      {% endif %}
+    >
+    <label
+      class="opt-label opt-label--btn btn relative text-center"
+      for="{{ opt }}-{{ forloop.index }}"
+    >
+      <span>{{ opt }}</span>
+    </label>
+    {% endfor %}
+
+    
+  </div>
+</fieldset>
+<!-- End Custom Variants  -->
+
+{% endfor %}
